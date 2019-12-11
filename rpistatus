@@ -1,0 +1,33 @@
+#!/bin/bash
+
+Devices="rpi01 rpi02 rpi03 rpi04 rpi05 rpi06 rpi07 rpi08 rpi09 rpi10 rpi11 rpi12 rpi13 rpi14 rpi15 rpi16 rpi17 rpi18 rpi19 rpi20"
+
+if [ $# != 0 ] ; then
+	for item in $*; do
+		ping $item -c 1 > /dev/null
+                if [ $? = 0 ] ; then
+                        echo "$item is alive" 
+                        continue
+                else echo "$item is dead"
+                        continue
+                fi
+	done
+
+else
+	for item in $Devices ; do
+		ping $item -c 1 > /dev/null
+#		if [ $? = 2 ] ; then
+#			echo "$item does not exist" 
+#			continue
+#		elif [ $? = 0 ] ; then
+		if [ $? = 0 ] ; then
+			 echo "$item is alive"
+			continue
+		else
+			echo "$item is dead"
+			continue
+		fi
+	done
+fi
+exit 0
+
